@@ -1,0 +1,47 @@
+Mizuka's Discord PY Bot User Guide
+
+Content:
+	- Installation
+	- Docker
+	- Commands
+	- Code
+
+Installation:
+	it's reccomended to use Python 3.10 or higher.
+
+	Windows is the easiest to install as it can be installed through the windows store.
+
+	Linux Debian installation is easily achieved through the Terminal. 
+	NOTE: "$" isn't part of a command. It's there to show a terminal command is being used. Do not include "$" when typing the commands in your terminal, it may or may not work depending on your Operating System.
+		Make sure that your system is up to date.
+			$ sudo apt update && sudo apt upgrade -y
+		To make the installation easier you can use deadsnakes custom PPA.
+			$ sudo apt install software-properties-common -y
+			$ sudo add-apt-repository ppa:deadsnakes/ppa
+		You'll be asked to press Enter to continue or Ctrl+c to cancel 
+		Python can now be installed with the following:
+			$ sudo apt install python3.10
+		Or, you could install py 3.11 with:
+			$ sudo apt install python3.11
+		To verify that python has been installed do the follwing:
+			$ python3 --version
+		Now to install pip (python's package manager)
+		Update the package list.
+			$ sudo apt update
+		Installing pip:
+			$ sudo apt install python3-pip
+		To verify the installation do the following:
+			$ pip3 --version
+	Installation on macOS is acheived by downloading the installer from the python 	website:	https://www.python.org/downloads/macos/
+
+	If you were to open up the directory for the bot ad run the bot you'd notice an error saying the discord package is missing.
+	To install discord packages required do the following:
+		$ pip3 install discord.py
+	If you're having issues try like this instead:
+		$ pip install discord.py
+	The required packages should now be installed and the bot can be turned on.
+	To turn on the bot make sure to be inside the bot's directory (this can be done by 	using the cd command). Run the bot with the Follwoing command:
+		$ python3 bot.py
+	Windows however will most likely give you an error. For windows do this instead:
+		$ python bot.py
+	
