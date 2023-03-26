@@ -2,7 +2,7 @@ import discord
 from discord import Colour
 import os
 
-async def run(client, message, user_ping, args):
+async def run(bot, message, user_ping, args):
     if message.author.bot:
             return
 

@@ -3,7 +3,7 @@ import os
 import asyncio
 import shutil
 
-async def run(client, message, user_ping, args):
+async def run(bot, message, user_ping, args):
         
     # Only process commands from members (not bots)
     if message.author.bot:
@@ -25,7 +25,7 @@ async def run(client, message, user_ping, args):
     def check(m):
         return m.author == message.author and m.channel == message.channel
     try:
-        command_name = await client.wait_for('message', check=check, timeout=60.0)
+        command_name = await bot.wait_for('message', check=check, timeout=60.0)
     except asyncio.TimeoutError:
         await message.channel.send("Timed out waiting for user response.")
         return
@@ -42,7 +42,7 @@ async def run(client, message, user_ping, args):
     await message.channel.send(f"Are you sure you want to delete the `{command_name}` command? Type `confirm {command_name}` to confirm or type `cancel` to cancel the deletion.")
 
     try:
-        confirm = await client.wait_for('message', check=check, timeout=60.0)
+        confirm = await bot.wait_for('message', check=check, timeout=60.0)
     except asyncio.TimeoutError:
         await message.channel.send("Timed out waiting for user response.")
         return

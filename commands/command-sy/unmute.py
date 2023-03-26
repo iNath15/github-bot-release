@@ -2,7 +2,7 @@
 import discord
 import config
 
-async def run(client, message, args, user_ping):
+async def run(bot, message, args, user_ping):
     has_permission = False
     for role in message.author.roles:
         if role.permissions.mute_members:

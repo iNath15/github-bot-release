@@ -1,7 +1,7 @@
 import csv
 import asyncio
 
-async def run(client, message, args, user_ping):
+async def run(bot, message, args, user_ping):
 
     # Check if the user has administrator privileges
     if not message.author.guild_permissions.administrator:
@@ -14,7 +14,7 @@ async def run(client, message, args, user_ping):
     def check(m):
         return m.channel == message.channel and m.author == message.author
     try:
-        response = await client.wait_for('message', check=check, timeout=20.0)
+        response = await bot.wait_for('message', check=check, timeout=20.0)
     except asyncio.TimeoutError:
         await message.channel.send("You didn't respond in time.")
         return
@@ -28,7 +28,7 @@ async def run(client, message, args, user_ping):
     def check(m):
         return m.channel == message.channel and m.author == message.author
     try:
-        response = await client.wait_for('message', check=check, timeout=20.0)
+        response = await bot.wait_for('message', check=check, timeout=20.0)
     except asyncio.TimeoutError:
         await message.channel.send("You didn't respond in time.")
         return

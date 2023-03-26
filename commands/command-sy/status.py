@@ -4,7 +4,7 @@ from discord import Activity, ActivityType
 import config
 import asyncio
 
-async def run(client, message, user_ping, args):
+async def run(bot, message, user_ping, args):
 
     # Check if the user has administrator privileges
     if not message.author.guild_permissions.administrator:
@@ -17,7 +17,7 @@ async def run(client, message, user_ping, args):
     def check(m):
         return m.channel == message.channel and m.author == message.author
     try:
-        response = await client.wait_for('message', check=check, timeout=20.0)
+        response = await bot.wait_for('message', check=check, timeout=20.0)
     except asyncio.TimeoutError:
         await message.channel.send("You didn't respond in time.")
         return
@@ -30,7 +30,7 @@ async def run(client, message, user_ping, args):
     def check(m):
         return m.channel == message.channel and m.author == message.author
     try:
-        response = await client.wait_for('message', check=check, timeout=20.0)
+        response = await bot.wait_for('message', check=check, timeout=20.0)
     except asyncio.TimeoutError:
         await message.channel.send("You didn't respond in time.")
         return
@@ -46,7 +46,7 @@ async def run(client, message, user_ping, args):
         def check(m):
             return m.channel == message.channel and m.author == message.author
         try:
-            response = await client.wait_for('message', check=check, timeout=20.0)
+            response = await bot.wait_for('message', check=check, timeout=20.0)
         except asyncio.TimeoutError:
             await message.channel.send("You didn't respond in time.")
             return
@@ -55,19 +55,19 @@ async def run(client, message, user_ping, args):
 
     if status_type == 1:
         game = discord.Game(f'{status}')
-        await client.change_presence(activity=game)
+        await bot.change_presence(activity=game)
     elif status_type == 2:
         stream = discord.Streaming(name=status, url=f'{status_url}')
-        await client.change_presence(activity=stream)
+        await bot.change_presence(activity=stream)
     elif status_type == 3:
         listen = discord.Activity(type=discord.ActivityType.listening, name=status)
-        await client.change_presence(activity=listen)
+        await bot.change_presence(activity=listen)
     elif status_type == 4:
         watch = discord.Activity(type=discord.ActivityType.watching, name=status)
-        await client.change_presence(activity=watch)
+        await bot.change_presence(activity=watch)
     else:
         listen = discord.Activity(type=discord.ActivityType.listening, name="Chikatto Chika Chika")
-        await client.change_presence(activity=listen)
+        await bot.change_presence(activity=listen)
 
 
     # Read the contents of the config.py file

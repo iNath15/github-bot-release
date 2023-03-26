@@ -1,4 +1,4 @@
-async def run(client, message, user_ping, args):
+async def run(bot, message, user_ping, args):
     # Check if the user has the necessary permissions
     if not message.author.guild_permissions.ban_members:
         await message.channel.send("You do not have permission to Ban others")

@@ -3,7 +3,7 @@ import os
 import asyncio
 
 
-async def run(client, message, user_ping, args):
+async def run(bot, message, user_ping, args):
     # Only process commands from members (not bots)
     if message.author.bot:
         return
@@ -18,7 +18,7 @@ async def run(client, message, user_ping, args):
 
     # Wait for the user's response, with a timeout of 30 seconds
     try:
-        response = await asyncio.wait_for(client.wait_for('message', check=lambda m: m.author == message.author), timeout=30)
+        response = await asyncio.wait_for(bot.wait_for('message', check=lambda m: m.author == message.author), timeout=30)
     except asyncio.TimeoutError:
         # If the user doesn't respond within the timeout, send a message and return
         await message.channel.send('Timed out waiting for response.')
@@ -40,7 +40,7 @@ async def run(client, message, user_ping, args):
         return m.author == message.author and m.attachments
 
     try:
-        response = await asyncio.wait_for(client.wait_for('message', check=check), timeout=30)
+        response = await asyncio.wait_for(bot.wait_for('message', check=check), timeout=30)
     except asyncio.TimeoutError:
         # If the user doesn't respond within the timeout, send a message and return
         await message.channel.send('Timed out waiting for response.')

@@ -1,7 +1,6 @@
-# type: ignore
 import config
+import asyncio
 import re
-import importlib
 
 async def run(bot, message, user_ping, args):
 
@@ -10,7 +9,7 @@ async def run(bot, message, user_ping, args):
         await message.channel.send('You need to be an admin to use this command.')
         return
 
-    await message.channel.send("Which role would you like to set as mute?")
+    await message.channel.send("Please mention the channel you want to set as the welcome channel.")
 
     # Wait for the user's response
     def check(m):
@@ -21,30 +20,26 @@ async def run(bot, message, user_ping, args):
         await message.channel.send("You didn't respond in time.")
         return
 
-    # Set the prefix to the user's response
-    role = response.content
-    new_mute = re.sub('[<@&>]', '', role)
+    # Extract the channel ID from the user's response
+    channel_match = re.match(r"<#(\d+)>", response.content)
+    if not channel_match:
+        await message.channel.send("You didn't mention a valid channel.")
+        return
+    channel_id = channel_match.group(1)
 
     # Read the contents of the config.py file
     with open('config.py', 'r') as f:
         config_contents = f.read()
 
-    # Set the MUTE_ROLE to an empty string if it is not already defined
-    if 'MUTE_ROLE' not in config_contents:
-        config_contents += '\nMUTE_ROLE = '
-
-    # Replace the value of the MUTE_ROLE variable with the new mute role
-    config_contents = config_contents.replace(f'MUTE_ROLE = {config.MUTE_ROLE}', f'MUTE_ROLE = {new_mute}')
+    # Replace the value of the Channel variable with the new Channel
+    config_contents = config_contents.replace(f'WELCOME_CHL = {config.WELCOME_CHL}', f'WELCOME_CHL = {channel_id}')
 
     # Write the modified contents back to the config.py file
     with open('config.py', 'w') as f:
         f.write(config_contents)
 
-    # Update the MUTE_ROLE variable in the config module
-    config.MUTE_ROLE = new_mute
-
-    # Reload the config module
-    importlib.reload(config)
+    # Update the WELCOME_CHL variable in the config module
+    config.WELCOME_CHL = channel_id
 
     # Send a message confirming the change
-    await message.channel.send(f"<@&{new_mute}> has been set as the mute role")
+    await message.channel.send(f"Welcome channel successfully set to <#{channel_id}>")

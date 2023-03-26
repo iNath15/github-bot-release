@@ -4,7 +4,7 @@ import discord
 from discord import Colour
 import os
 
-async def run(client, message, user_ping, args):
+async def run(bot, message, user_ping, args):
 
     if message.author.bot:
         return
@@ -16,7 +16,7 @@ async def run(client, message, user_ping, args):
 
         embed = discord.Embed(title="Here's what i can do")
         embed.add_field(name='My Prefix:', value='\n' + config.PREFIX)
-        embed.add_field(name='Useful Commands:', value='\nhelp' + '\nrank' + '\ntiemr' + '\nmembers')
+        embed.add_field(name='Useful Commands:', value='\nhelp' + '\nrank' + '\ntimer' + '\nmembers')
         embed.add_field(name='\nGif/Action commands:', value='\n'.join(commands_usr))
         embed.color = Colour(int('FF69B4', 16))
 

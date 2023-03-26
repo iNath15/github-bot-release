@@ -6,7 +6,7 @@ import pathlib
 
 sent_files = []
 
-async def run(client, message, user_ping, args):
+async def run(bot, message, user_ping, args):
     file_name = pathlib.Path(__file__).name
     base_name = os.path.basename(file_name)
     file_path, extension = base_name.split('.')

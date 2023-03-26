@@ -7,7 +7,7 @@ import pathlib
 sent_files = []
 
 
-async def run(client, message, user_ping, args):
+async def run(bot, message, user_ping, args):
     embed = discord.Embed() # create the embed variable first
 
     file_name = pathlib.Path(__file__).name

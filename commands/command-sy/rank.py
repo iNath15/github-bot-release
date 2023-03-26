@@ -16,7 +16,7 @@ def progress_bar(value, max_value, size):
 
     return bar
 
-async def run(client, message, user_ping, args):
+async def run(bot, message, user_ping, args):
     if user_ping:
         user_id = str(user_ping.id)
     else:
